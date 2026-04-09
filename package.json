@@ -1,0 +1,37 @@
+{
+  "name": "test_pixijs8_1st",
+  "version": "1.0.0",
+  "description": "First test of pixijs ver8.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve",
+    "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^14.0.0",
+    "html-webpack-plugin": "^5.6.6",
+    "npm-check-updates": "^19.6.5",
+    "pixi.js": "^8.17.1",
+    "source-map-loader": "^5.0.0",
+    "svg-url-loader": "^8.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2",
+    "webpack-dev-server": "^5.2.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@esotericsoftware/spine-canvas": "^4.2.109",
+    "@esotericsoftware/spine-canvaskit": "^4.2.109",
+    "@esotericsoftware/spine-core": "^4.2.109",
+    "@esotericsoftware/spine-phaser": "^4.1.56",
+    "@esotericsoftware/spine-pixi-v8": "^4.2.109",
+    "@esotericsoftware/spine-player": "^4.2.109",
+    "@esotericsoftware/spine-threejs": "^4.2.109",
+    "@esotericsoftware/spine-webgl": "^4.2.109"
+  }
+}
