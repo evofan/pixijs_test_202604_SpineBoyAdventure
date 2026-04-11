@@ -1,7 +1,7 @@
 import { Application, Assets } from "pixi.js";
 import "@esotericsoftware/spine-pixi-v8";
 
-// Asynchronous IIFE
+// Asynchronous IIFE（非同期の即時実行関数）
 (async () => {
   // PixiJSのアプリケーションを作成する
   const app = new Application();
@@ -16,27 +16,27 @@ import "@esotericsoftware/spine-pixi-v8";
   await Assets.load([
     {
       alias: "spineSkeleton",
-      src: "https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pro.skel",
+      src: "./assets/images/spineboy-pro.skel",
     },
     {
       alias: "spineAtlas",
-      src: "https://raw.githubusercontent.com/pixijs/spine-v8/main/examples/assets/spineboy-pma.atlas",
+      src: "./assets/images/spineboy-pma.atlas",
     },
     {
       alias: "sky",
-      src: "https://pixijs.com/assets/tutorials/spineboy-adventure/sky.png",
+      src: "./assets/images/sky.png",
     },
     {
       alias: "background",
-      src: "https://pixijs.com/assets/tutorials/spineboy-adventure/background.png",
+      src: "./assets/images/background.png",
     },
     {
       alias: "midground",
-      src: "https://pixijs.com/assets/tutorials/spineboy-adventure/midground.png",
+      src: "./assets/images/midground.png",
     },
     {
       alias: "platform",
-      src: "https://pixijs.com/assets/tutorials/spineboy-adventure/platform.png",
+      src: "./assets/images/platform.png",
     },
   ]);
 })();
