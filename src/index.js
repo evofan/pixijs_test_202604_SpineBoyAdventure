@@ -1,6 +1,7 @@
 import { Application, Assets } from "pixi.js";
 import "@esotericsoftware/spine-pixi-v8";
 import { SpineBoy } from "./SpineBoy";
+import { Controller } from "./Keyboard";
 
 // Asynchronous IIFE（非同期の即時実行関数）
 (async () => {
@@ -51,4 +52,21 @@ import { SpineBoy } from "./SpineBoy";
 
   // キャラクターをステージに追加
   app.stage.addChild(spineBoy.view);
+
+  // キーボードコントローラーを使用する
+  const controller = new Controller();
+
+  // アニメーション
+  let currentAnimation;
+
+  app.ticker.add((time) => {
+    const rightPressed = controller.keys.right.pressed;
+    const animationName = rightPressed ? "walk" : "idle"; // Spine内のアニメーション名
+    const loop = true;
+
+    if (currentAnimation !== animationName) {
+      currentAnimation = animationName;
+      spineBoy.spine.state.setAnimation(0, animationName, loop); // アニメーションさせる
+    }
+  });
 })();
