@@ -1,5 +1,6 @@
 import { Application, Assets } from "pixi.js";
 import "@esotericsoftware/spine-pixi-v8";
+import { SpineBoy } from "./SpineBoy";
 
 // Asynchronous IIFE（非同期の即時実行関数）
 (async () => {
@@ -39,4 +40,15 @@ import "@esotericsoftware/spine-pixi-v8";
       src: "./assets/images/platform.png",
     },
   ]);
+
+  // キャラクターを作成
+  const spineBoy = new SpineBoy();
+
+  // キャラクターのサイズを変換して調整
+  spineBoy.view.x = app.screen.width / 2;
+  spineBoy.view.y = app.screen.height - 80;
+  spineBoy.spine.scale.set(0.5);
+
+  // キャラクターをステージに追加
+  app.stage.addChild(spineBoy.view);
 })();
