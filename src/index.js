@@ -2,6 +2,7 @@ import { Application, Assets } from "pixi.js";
 import "@esotericsoftware/spine-pixi-v8";
 import { SpineBoy } from "./SpineBoy";
 import { Controller } from "./Keyboard";
+import { Scene } from "./Scene";
 
 // Asynchronous IIFE（非同期の即時実行関数）
 (async () => {
@@ -51,7 +52,19 @@ import { Controller } from "./Keyboard";
   spineBoy.spine.scale.set(0.5);
 
   // キャラクターをステージに追加
-  app.stage.addChild(spineBoy.view);
+  // app.stage.addChild(spineBoy.view);
+
+  // シーンを作成
+  const scene = new Scene(app.screen.width, app.screen.height);
+
+  // ビューの変換を調整する
+  scene.view.y = app.screen.height;
+  spineBoy.view.x = app.screen.width / 2;
+  spineBoy.view.y = app.screen.height - scene.floorHeight;
+  spineBoy.spine.scale.set(scene.scale * 0.32);
+
+  // シーンとSpineキャラクターをステージに追加
+  app.stage.addChild(scene.view, spineBoy.view);
 
   // キーボードコントローラーを使用する
   const controller = new Controller();
@@ -60,6 +73,7 @@ import { Controller } from "./Keyboard";
   // let currentAnimation;
 
   // キャラクターのアニメーションを引き起こすトリガー
+  // （出現アニメーションを再生）
   spineBoy.spawn();
 
   app.ticker.add((time) => {

@@ -78,7 +78,7 @@ export class SpineBoy {
     this.spine.state.data.defaultMix = 0.2;
   }
 
-  // 入り口から入ってくるアニメーションを再生する
+  // 入り口から入ってくるアニメーション（出現アニメーション）を再生する
   spawn() {
     this.spine.state.setAnimation(0, animationMap.spawn.name);
   }
