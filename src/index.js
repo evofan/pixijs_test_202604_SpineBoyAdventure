@@ -57,16 +57,37 @@ import { Controller } from "./Keyboard";
   const controller = new Controller();
 
   // アニメーション
-  let currentAnimation;
+  // let currentAnimation;
+
+  // キャラクターのアニメーションを引き起こすトリガー
+  spineBoy.spawn();
 
   app.ticker.add((time) => {
-    const rightPressed = controller.keys.right.pressed;
-    const animationName = rightPressed ? "walk" : "idle"; // Spine内のアニメーション名
-    const loop = true;
+    // const rightPressed = controller.keys.right.pressed;
+    // const animationName = rightPressed ? "walk" : "idle"; // Spine内のアニメーション名
+    // const loop = true;
 
-    if (currentAnimation !== animationName) {
-      currentAnimation = animationName;
-      spineBoy.spine.state.setAnimation(0, animationName, loop); // アニメーションさせる
-    }
+    // if (currentAnimation !== animationName) {
+    //   currentAnimation = animationName;
+    //   spineBoy.spine.state.setAnimation(0, animationName, loop); // アニメーションさせる
+    // }
+
+    // キャラクターが生成アニメーションしている間はスキップ
+    if (spineBoy.isSpawning()) return;
+
+    // キーボードコントローラーの状態に基づいてキャラクターのステートを更新する
+    spineBoy.state.walk =
+      controller.keys.left.pressed || controller.keys.right.pressed;
+    if (spineBoy.state.run && spineBoy.state.walk) spineBoy.state.run = true;
+    else
+      spineBoy.state.run =
+        controller.keys.left.doubleTap || controller.keys.right.doubleTap;
+    spineBoy.state.hover = controller.keys.down.pressed;
+    if (controller.keys.left.pressed) spineBoy.direction = -1;
+    else if (controller.keys.right.pressed) spineBoy.direction = 1;
+    spineBoy.state.jump = controller.keys.space.pressed;
+
+    // 最新の状態に戻づいてキャラクターの状態を更新する
+    spineBoy.update();
   });
 })();
