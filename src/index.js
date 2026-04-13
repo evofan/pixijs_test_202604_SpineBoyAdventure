@@ -2,7 +2,7 @@ import { Application, Assets } from "pixi.js";
 import "@esotericsoftware/spine-pixi-v8";
 import { SpineBoy } from "./SpineBoy";
 import { Controller } from "./Keyboard";
-import { Scene } from "./Scene";
+import { Scene } from "./Scene"
 
 // Asynchronous IIFE（非同期の即時実行関数）
 (async () => {
@@ -103,5 +103,16 @@ import { Scene } from "./Scene";
 
     // 最新の状態に戻づいてキャラクターの状態を更新する
     spineBoy.update();
+    
+    // キャラクターの状態に基づいてシーンの水平速度を設定する
+    let speed = 1.25;
+
+    // 
+    if (spineBoy.state.hover) speed = 7.5; // ホバーボード時は速度を7.5に設定する
+    else if (spineBoy.state.run) speed = 3.75; // 走ってる時は速度を3.75にする
+
+    if (spineBoy.state.walk) {
+      scene.positionX -= speed * scene.scale * spineBoy.direction; // 歩いている時はキャラクターの向いている方向にスクロール方向を設定する
+    }
   });
 })();

@@ -29,7 +29,7 @@ export class Scene {
       applyAnchorToTexture: true,
     };
 
-    // タイリングスプラト（背景）を作成する
+    // タイリングスプライト（背景）を作成する
     this.background = new TilingSprite({
       texture: backgroundTexture,
       width,
@@ -37,7 +37,7 @@ export class Scene {
       ...baseOptions,
     });
 
-    // タイリングスプラト（中景）を作成する
+    // タイリングスプライト（中景）を作成する
     this.midground = new TilingSprite({
       texture: midgroundTexture,
       width,
@@ -45,7 +45,7 @@ export class Scene {
       ...baseOptions,
     });
 
-    // タイリングスプラト（プラットフォーム）を作成する
+    // タイリングスプライト（プラットフォーム）を作成する
     this.platform = new TilingSprite({
       texture: platformTexture,
       width,
@@ -55,6 +55,7 @@ export class Scene {
 
     this.floorHeight = platformHeight * 0.43; // 外部参照用の床の高さを計算する
     this.background.y = this.midground.y = -this.floorHeight; // 背景・中景レイヤーの位置を指定
+
     // 全てのレイヤーをメインのviewに追加
     this.view.addChild(
       this.sky,
@@ -62,5 +63,17 @@ export class Scene {
       this.midground,
       this.platform,
     );
+  }
+
+  // プラットフォームの水平位置をシーン移動のキー位置として指定する
+  get positionX() {
+    return this.platform.tilePosition.x;
+  }
+
+  // 背景レイヤーに視差スクロールを適用しながらプラットフォームの水平位置を設定する
+  set positionX(value) {
+    this.background.tilePosition.x = value * 0.1;
+    this.midground.tilePosition.x = value * 0.25;
+    this.platform.tilePosition.x = value;
   }
 }
